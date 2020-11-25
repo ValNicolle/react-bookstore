@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+
 .spin-loader{
   pointer-events: none;
   position: absolute;
@@ -15,13 +16,15 @@
 .books-ctn{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: auto;
+  padding-top: 40px;
 
   .single-book{
-    width: 48%;
+    font-family: 'Source Sans Pro', sans-serif;
+    width: 100%;
     border-radius: 20px;
     box-shadow: 5px 4px 12px 1px #d6d6d6;
     display: flex;
@@ -57,8 +60,28 @@
     }
 
     .text-ctn{
-      padding: 15px;
+      padding: 15px 15px 15px 25px;
       
+      h2{
+        font-family: 'Bree Serif', serif;
+        font-size: 2em;
+        margin-top: 10px;
+      }
+
+      button{
+        font-family: 'Source Sans Pro', sans-serif;
+        background: rgb(222,1,1);
+        background: linear-gradient(90deg, rgba(222,1,1,1) 0%, rgba(213,72,2,1) 100%);
+        box-shadow: 5px 4px 12px 1px #d6d6d6;
+        border: none;
+        color: white;
+        padding: 10px 30px;
+        border-radius: 8px;
+        text-transform: uppercase;
+        margin-right: 10px;
+        font-weight: bold;
+        cursor: pointer;
+      }
     }
   }
 }

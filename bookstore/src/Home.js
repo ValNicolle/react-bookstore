@@ -37,7 +37,12 @@ function Home () {
                         <div className="text-ctn">
                             <h2>{book.title}</h2>
                             <p>{book.synopsis[0]}</p>
+                            <div className="btn-ctn">
+                              <button>Ajouter au panier</button>
+                              <button>Voir plus</button>
+                            </div>
                         </div>
+                        
                         
                     </div>
                 ))}
