@@ -29,6 +29,7 @@
     box-shadow: 5px 4px 12px 1px #d6d6d6;
     display: flex;
     margin-bottom: 30px;
+    transition: all .3s ease;
 
     .image-ctn{
       background-color: #cecbd0;
@@ -36,6 +37,8 @@
       padding: 30px;
       position: relative;
       background-size: cover;
+      display: flex;
+      align-items: center;
     }
 
     .image-ctn::after {
@@ -68,6 +71,16 @@
         margin-top: 10px;
       }
 
+      p{
+        color: #989898;
+      }
+
+      .price{
+        font-family: 'Bree Serif', serif;
+        font-size: 1.7em;
+        margin-bottom: 20px;
+      }
+
       button{
         font-family: 'Source Sans Pro', sans-serif;
         background: rgb(222,1,1);
@@ -76,7 +89,7 @@
         border: none;
         color: white;
         padding: 10px 30px;
-        border-radius: 8px;
+        border-radius: 20px;
         text-transform: uppercase;
         margin-right: 10px;
         font-weight: bold;
