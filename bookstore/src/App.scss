@@ -13,6 +13,30 @@
   width: 100px;
 }
 
+.search-ctn{
+  max-width: 1200px;
+  padding: 0 40px;
+  margin: auto;
+
+  input{
+    font-family: "Source Sans Pro", sans-serif;
+    margin: 20px auto;
+    display: block;
+    height: 40px;
+    width: 400px;
+    background-color: #eee;
+    border: 1px solid #a4a4a4;
+    border-radius: 20px;
+    padding-left: 10px;
+    font-size: 1em;
+    outline: none;
+
+    &:focus{
+      box-shadow: 5px 4px 12px 1px #d6d6d6;
+    }
+  }
+}
+
 .books-ctn{
   display: flex;
   flex-direction: row;
@@ -20,7 +44,7 @@
   flex-wrap: wrap;
   max-width: 1200px;
   margin: auto;
-  padding-top: 40px;
+  padding: 40px;
 
   .single-book{
     font-family: 'Source Sans Pro', sans-serif;
@@ -73,6 +97,10 @@
 
       p{
         color: #989898;
+      }
+
+      .stabilo{
+        background-color: yellow;
       }
 
       .price{
