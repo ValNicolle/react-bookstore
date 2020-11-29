@@ -23,7 +23,8 @@
     margin: 20px auto;
     display: block;
     height: 40px;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     background-color: #eee;
     border: 1px solid #a4a4a4;
     border-radius: 20px;
@@ -63,6 +64,7 @@
       background-size: cover;
       display: flex;
       align-items: center;
+      justify-content: center;
     }
 
     .image-ctn::after {
@@ -112,7 +114,7 @@
       button{
         font-family: 'Source Sans Pro', sans-serif;
         background: rgb(222,1,1);
-        background: linear-gradient(90deg, rgba(222,1,1,1) 0%, rgba(213,72,2,1) 100%);
+        background: linear-gradient(90deg, #224d80 0%, #3e82ca 100%);
         box-shadow: 5px 4px 12px 1px #d6d6d6;
         border: none;
         color: white;
@@ -123,6 +125,27 @@
         font-weight: bold;
         cursor: pointer;
       }
+
+      .cart-counter{
+        display: flex;
+
+        .plus{
+          padding: 10px;
+          border-radius: 20px 0 0 20px;
+        }
+        .minus{
+          padding: 10px;
+          border-radius: 0 20px 20px 0;
+        }
+      }
     }
+  }
+}
+
+/*** MOBILE ***/
+
+@media screen and (max-width: 650px) {
+  .single-book{
+    flex-direction: column;
   }
 }

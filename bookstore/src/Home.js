@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { withStore } from "./Store"
 import loader from './loader.webp'
 import BookItem from './BookItem'
 
-function Home () {
+function Home (props) {
 
 	const [initialBooks, setInitialBooks] = useState([])
 	const [books, setBooks] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-
   //API call
 	useEffect(() => {
-      fetch("http://henri-potier.xebia.fr/books")
+    fetch("http://henri-potier.xebia.fr/books")
       .then(res => res.json())
       .then(
         (result) => {
@@ -23,6 +23,7 @@ function Home () {
           console.log(error)
         }
       )
+
   }, [])
     
   // Search function
@@ -33,6 +34,14 @@ function Home () {
         })
       setBooks(filteredData) //set filtered data
       
+  }
+
+  const handleAddToCart = (item) => {
+    console.log(item);
+  }
+
+  const handleRemoveFromCart = (item) => {
+
   }
 
 
@@ -50,7 +59,7 @@ function Home () {
             </div>
             <div className="books-ctn">
                 {books.map((book, index) => (
-                    <BookItem key={index} book={book} />
+                    <BookItem key={index} book={book} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} />
                 ))}
             </div>
         </div>
@@ -62,4 +71,4 @@ function Home () {
 	
 }
 
-export default Home;
+export default withStore(Home);

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from './Home';
+import { createStore } from "./Store";
 import './App.scss';
 
 function App() {
@@ -21,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default createStore(App);
