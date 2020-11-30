@@ -5,43 +5,50 @@ import BookItem from './BookItem'
 
 function Home (props) {
 
-	const [initialBooks, setInitialBooks] = useState([])
-	const [books, setBooks] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+    const [books, setBooks] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
   //API call
-	useEffect(() => {
-    fetch("http://henri-potier.xebia.fr/books")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setBooks(result) 
-          setInitialBooks(result) 
-          setIsLoading(false)
-          console.log(result);
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
+    useEffect(() => {
+        //Get data and send it to the store
+        fetch("http://henri-potier.xebia.fr/books")
+        .then(res => res.json())
+        .then(
+            (result) => {
+            setBooks(result) 
+            props.store.set("books", result)
+            setIsLoading(false)
+            console.log(result);
+            },
+            (error) => {
+            console.log(error)
+            }
+        )
+
 
   }, [])
     
   // Search function
   const handleSearch = (evt) => {
-      let entry = evt.target.value.toLowerCase() // Input
+      const entry = evt.target.value.toLowerCase() // Input
+      const initialBooks = props.store.get('books')
       let filteredData = initialBooks.filter((book) => { // Filter data inside Title an Synopsis
         return book.title.toLowerCase().includes(entry) || book.synopsis.join(' ').toLowerCase().includes(entry)
         })
       setBooks(filteredData) //set filtered data
-      
   }
 
   const handleAddToCart = (item) => {
-    console.log(item);
+    const storeData = props.store.get('cart',[])
+    props.store.set('cart', [...storeData, item])
   }
 
   const handleRemoveFromCart = (item) => {
-
+    const storeData = props.store.get('cart', [])
+    const index = storeData.indexOf(item);
+    if (index > -1) {
+        storeData.splice(index, 1);
+    }
+    props.store.set('cart', storeData)
   }
 
 

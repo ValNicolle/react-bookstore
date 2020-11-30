@@ -111,6 +111,10 @@
         margin-bottom: 20px;
       }
 
+      .btn-ctn{
+        display: flex;
+      }
+
       button{
         font-family: 'Source Sans Pro', sans-serif;
         background: rgb(222,1,1);
@@ -132,10 +136,19 @@
         .plus{
           padding: 10px;
           border-radius: 20px 0 0 20px;
+          margin: 0;
         }
         .minus{
           padding: 10px;
           border-radius: 0 20px 20px 0;
+        }
+        .number{
+          padding: 0 12px;
+          text-align: center;
+          line-height: 34px;
+          border: 1px solid #326baa;
+          font-size: 1.2em;
+          background: #eeeeee;
         }
       }
     }

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { withStore } from "./Store"
 
 function BookItem (props) {
 
     const [unfolded, setUnfolded] = useState(false)
     const [isInCart, setIsInCart] = useState(false)
 
+    function getQuantityInCart(){
+        return props.store.get('cart', []).filter(bk => bk.isbn == props.book.isbn).length
+    }
 
 	return (
 
@@ -22,12 +26,13 @@ function BookItem (props) {
                 <div className="price">{props.book.price} €</div>
                 <div className="btn-ctn">
                     {!isInCart ? 
-                        <button onClick={() => {props.handleAddToCart(props.book); setIsInCart(!isInCart)}}>🛒 Ajouter au panier</button>
+                        <button onClick={() => {props.handleAddToCart(props.book.isbn); setIsInCart(!isInCart)}}>🛒 Ajouter au panier</button>
                         :
                         <div className="cart-counter">
-                            <button className="plus">+</button>
-                            <div className="number">3</div>
-                            <button className="minus">-</button>
+                            <button onClick={() => {props.handleAddToCart(props.book.isbn)}} className="plus">+</button>
+                            {/* <div className="number">{getQuantityInCart()}</div> */}
+                            <div className="number">caca</div>
+                            <button onClick={() => {props.handleRemoveFromCart(props.book.isbn)}} className="minus">-</button>
                         </div>
                     }
                     
@@ -42,4 +47,4 @@ function BookItem (props) {
 	
 }
 
-export default BookItem;
+export default withStore(BookItem);
