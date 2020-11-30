@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { withStore } from "./Store"
+import { useStore, useSetStoreValue } from "react-context-hook"
 
 function BookItem (props) {
 
     const [unfolded, setUnfolded] = useState(false)
     const [isInCart, setIsInCart] = useState(false)
+    const [cart, setCart, deleteCart] = useStore("cart", [])
+    const quantityInCart = cart.filter(item => item === props.book.isbn).length
+    console.log(cart);
 
-    function getQuantityInCart(){
-        return props.store.get('cart', []).filter(bk => bk.isbn == props.book.isbn).length
-    }
+    function handleRemoveFromCart (item) {
+        console.log(item);
+        const tempData = cart
+        const index = tempData.indexOf(item);
+        if (index > -1) {
+            tempData.splice(index, 1);
+        }
+        console.log(tempData);
+        setCart(cart.splice(cart.indexOf(item),1))
+
+      }
+
 
 	return (
 
@@ -17,7 +29,7 @@ function BookItem (props) {
             <div className="text-ctn">
                 <h2>{props.book.title}</h2>
                 <p>{props.book.synopsis[0]}</p>
-                {unfolded &&
+                {unfolded && // Show all text when "voir plus" is clicked
                     <div>
                         <p>{props.book.synopsis[1]}</p>
                         <p>{props.book.synopsis[2]}</p>
@@ -26,13 +38,12 @@ function BookItem (props) {
                 <div className="price">{props.book.price} €</div>
                 <div className="btn-ctn">
                     {!isInCart ? 
-                        <button onClick={() => {props.handleAddToCart(props.book.isbn); setIsInCart(!isInCart)}}>🛒 Ajouter au panier</button>
+                        <button onClick={() => {setCart([...cart, props.book.isbn]); setIsInCart(!isInCart)}}>🛒 Ajouter au panier</button>
                         :
                         <div className="cart-counter">
-                            <button onClick={() => {props.handleAddToCart(props.book.isbn)}} className="plus">+</button>
-                            {/* <div className="number">{getQuantityInCart()}</div> */}
-                            <div className="number">caca</div>
-                            <button onClick={() => {props.handleRemoveFromCart(props.book.isbn)}} className="minus">-</button>
+                            <button onClick={() => {handleRemoveFromCart(props.book.isbn)}} className="minus">-</button>
+                            <div className="number">{quantityInCart}</div>
+                            <button onClick={() => {setCart([...cart, props.book.isbn])}} className="plus">+</button>
                         </div>
                     }
                     
@@ -47,4 +58,4 @@ function BookItem (props) {
 	
 }
 
-export default withStore(BookItem);
+export default BookItem;

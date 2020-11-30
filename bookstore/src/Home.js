@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { withStore } from "./Store"
+import { useStore } from "react-context-hook"
 import loader from './loader.webp'
 import BookItem from './BookItem'
 
 function Home (props) {
 
-    const [books, setBooks] = useState([])
+    const [books, setBooks, deleteBooks] = useStore("books", []);
+    const [cart, setCart, deleteCart] = useStore("cart", []);
+    const [displayedBooks, setDisplayedBooks] = useState([])
     const [isLoading, setIsLoading] = useState(true)
   //API call
     useEffect(() => {
@@ -14,8 +16,8 @@ function Home (props) {
         .then(res => res.json())
         .then(
             (result) => {
-            setBooks(result) 
-            props.store.set("books", result)
+            setDisplayedBooks(result) 
+            // props.store.set("books", result)
             setIsLoading(false)
             console.log(result);
             },
@@ -37,19 +39,7 @@ function Home (props) {
       setBooks(filteredData) //set filtered data
   }
 
-  const handleAddToCart = (item) => {
-    const storeData = props.store.get('cart',[])
-    props.store.set('cart', [...storeData, item])
-  }
 
-  const handleRemoveFromCart = (item) => {
-    const storeData = props.store.get('cart', [])
-    const index = storeData.indexOf(item);
-    if (index > -1) {
-        storeData.splice(index, 1);
-    }
-    props.store.set('cart', storeData)
-  }
 
 
 
@@ -65,8 +55,8 @@ function Home (props) {
                 <input onChange={handleSearch} type="text" placeholder="Recherchez un terme"/>
             </div>
             <div className="books-ctn">
-                {books.map((book, index) => (
-                    <BookItem key={index} book={book} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} />
+                {displayedBooks.map((book, index) => (
+                    <BookItem key={index} book={book} />
                 ))}
             </div>
         </div>
@@ -74,8 +64,7 @@ function Home (props) {
 	}
 			
 		  
-  		
-	
 }
 
-export default withStore(Home);
+
+export default Home;
