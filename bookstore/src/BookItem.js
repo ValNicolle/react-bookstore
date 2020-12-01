@@ -7,17 +7,26 @@ function BookItem (props) {
     const [isInCart, setIsInCart] = useState(false)
     const [cart, setCart, deleteCart] = useStore("cart", [])
     const quantityInCart = cart.filter(item => item === props.book.isbn).length
-    console.log(cart);
+    // console.log(cart);
 
-    function handleRemoveFromCart (item) {
-        console.log(item);
-        const tempData = cart
-        const index = tempData.indexOf(item);
-        if (index > -1) {
-            tempData.splice(index, 1);
+    function handleRemoveFromCart () {
+
+        // console.log(item);
+        // const tempData = cart
+        // const index = tempData.indexOf(item);
+        // if (index > -1) {
+        //     tempData.splice(index, 1);
+        // }
+        // console.log(tempData);
+        // setCart((cart.indexOf(item) > -1)cart.splice(cart.indexOf(item),1))
+        if((cart.indexOf(props.book.isbn) > -1)){
+            console.log(cart.indexOf(props.book.isbn));
+
+            const newData = [...cart]
+            
+            
+            setCart(newData.slice(newData.indexOf(props.book.isbn), 1))
         }
-        console.log(tempData);
-        setCart(cart.splice(cart.indexOf(item),1))
 
       }
 
@@ -41,7 +50,7 @@ function BookItem (props) {
                         <button onClick={() => {setCart([...cart, props.book.isbn]); setIsInCart(!isInCart)}}>🛒 Ajouter au panier</button>
                         :
                         <div className="cart-counter">
-                            <button onClick={() => {handleRemoveFromCart(props.book.isbn)}} className="minus">-</button>
+                            <button onClick={handleRemoveFromCart} className="minus">-</button>
                             <div className="number">{quantityInCart}</div>
                             <button onClick={() => {setCart([...cart, props.book.isbn])}} className="plus">+</button>
                         </div>

@@ -6,7 +6,6 @@ import BookItem from './BookItem'
 function Home (props) {
 
     const [books, setBooks, deleteBooks] = useStore("books", []);
-    const [cart, setCart, deleteCart] = useStore("cart", []);
     const [displayedBooks, setDisplayedBooks] = useState([])
     const [isLoading, setIsLoading] = useState(true)
   //API call
@@ -18,8 +17,8 @@ function Home (props) {
             (result) => {
             setDisplayedBooks(result) 
             // props.store.set("books", result)
+            setBooks(result)
             setIsLoading(false)
-            console.log(result);
             },
             (error) => {
             console.log(error)
@@ -30,13 +29,13 @@ function Home (props) {
   }, [])
     
   // Search function
-  const handleSearch = (evt) => {
+  const handleSearch = (evt) => { 
       const entry = evt.target.value.toLowerCase() // Input
-      const initialBooks = props.store.get('books')
+      const initialBooks = books
       let filteredData = initialBooks.filter((book) => { // Filter data inside Title an Synopsis
         return book.title.toLowerCase().includes(entry) || book.synopsis.join(' ').toLowerCase().includes(entry)
         })
-      setBooks(filteredData) //set filtered data
+        setDisplayedBooks(filteredData) //set filtered data
   }
 
 
