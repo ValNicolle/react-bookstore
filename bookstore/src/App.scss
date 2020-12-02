@@ -1,5 +1,9 @@
+// Variables
+$box-shadow: 5px 4px 12px 1px #d6d6d6;
+
 *{
   box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 
@@ -33,11 +37,12 @@
     outline: none;
 
     &:focus{
-      box-shadow: 5px 4px 12px 1px #d6d6d6;
+      box-shadow: $box-shadow;
     }
   }
 }
 
+/*** BookItem ***/
 .books-ctn{
   display: flex;
   flex-direction: row;
@@ -51,7 +56,7 @@
     font-family: 'Source Sans Pro', sans-serif;
     width: 100%;
     border-radius: 20px;
-    box-shadow: 5px 4px 12px 1px #d6d6d6;
+    box-shadow: $box-shadow;
     display: flex;
     margin-bottom: 30px;
     transition: all .3s ease;
@@ -119,7 +124,7 @@
         font-family: 'Source Sans Pro', sans-serif;
         background: rgb(222,1,1);
         background: linear-gradient(90deg, #224d80 0%, #3e82ca 100%);
-        box-shadow: 5px 4px 12px 1px #d6d6d6;
+        box-shadow: $box-shadow;
         border: none;
         color: white;
         padding: 10px 30px;
@@ -151,6 +156,71 @@
           background: #eeeeee;
         }
       }
+    }
+  }
+}
+
+/*** MinCart ***/
+.MiniCart{
+  position: fixed;
+  z-index: 10;
+  top: 30px;
+  right: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: $box-shadow;
+  cursor: pointer;
+  background-color: white;
+
+  .qty{
+    position: absolute;
+    background-color: #a81330;
+    width: 20px;
+    border-radius: 50%;
+    height: 20px;
+    text-align: center;
+    color: white;
+    left: 2px;
+    border: 0px;
+    font-size: .8em;
+    line-height: 1.5em;
+  }
+}
+
+/*** Cart ***/
+.back{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  z-index: 10;
+  top: 30px;
+  left: 30px;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  box-shadow: $box-shadow;
+  cursor: pointer;
+  background-color: white;
+  line-height: 1em;
+}
+
+.Cart{
+  box-shadow: $box-shadow;
+  border-radius: 20px;
+  margin: auto;
+  max-width: 600px;
+  margin-top: 40px;
+  
+
+  .cart-item{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    
+    &:not(:last-child){
+      border-bottom: 1px solid #e4e4e4;
     }
   }
 }

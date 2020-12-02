@@ -1,34 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { useStore, useSetStoreValue } from "react-context-hook"
+import React, { useState } from 'react'
+import { useStore } from "react-context-hook"
 
 function BookItem (props) {
 
     const [unfolded, setUnfolded] = useState(false)
-    const [isInCart, setIsInCart] = useState(false)
-    const [cart, setCart, deleteCart] = useStore("cart", [])
+    const [cart, setCart] = useStore("cart", [])
     const quantityInCart = cart.filter(item => item === props.book.isbn).length
-    // console.log(cart);
+
 
     function handleRemoveFromCart () {
-
-        // console.log(item);
-        // const tempData = cart
-        // const index = tempData.indexOf(item);
-        // if (index > -1) {
-        //     tempData.splice(index, 1);
-        // }
-        // console.log(tempData);
-        // setCart((cart.indexOf(item) > -1)cart.splice(cart.indexOf(item),1))
-        if((cart.indexOf(props.book.isbn) > -1)){
-            console.log(cart.indexOf(props.book.isbn));
-
-            const newData = [...cart]
-            
-            
-            setCart(newData.slice(newData.indexOf(props.book.isbn), 1))
+        let newCart = [...cart]
+        const index = cart.indexOf(props.book.isbn)
+        // If element exists, remove it from the cart
+        if(index > -1){
+            newCart.splice(cart.indexOf(props.book.isbn), 1)
+            setCart(newCart)
         }
-
-      }
+    }
 
 
 	return (
@@ -46,8 +34,8 @@ function BookItem (props) {
                 }
                 <div className="price">{props.book.price} €</div>
                 <div className="btn-ctn">
-                    {!isInCart ? 
-                        <button onClick={() => {setCart([...cart, props.book.isbn]); setIsInCart(!isInCart)}}>🛒 Ajouter au panier</button>
+                    {quantityInCart < 1 ? 
+                        <button onClick={() => {setCart([...cart, props.book.isbn])}}>🛒 Ajouter au panier</button>
                         :
                         <div className="cart-counter">
                             <button onClick={handleRemoveFromCart} className="minus">-</button>
