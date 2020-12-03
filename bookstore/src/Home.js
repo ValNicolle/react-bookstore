@@ -15,8 +15,8 @@ function Home (props) {
         .then(res => res.json())
         .then(
             (result) => {
+              console.log(result);
             setDisplayedBooks(result) 
-            // props.store.set("books", result)
             setBooks(result)
             setIsLoading(false)
             },
