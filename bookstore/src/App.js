@@ -9,17 +9,13 @@ function App() {
   return (
     <Router>
         <div className="App">
-        <Link to='/cart'><MiniCart /></Link>
+          <Link to='/cart'><MiniCart /></Link>
           <div className="content">
             <Route exact path="/" component={Home}/>
             <Route exact path="/cart" component={Cart}/>
-            {/* <Route path="/private_messages" component={Messages}/> */}
-
           </div>
-
         </div>
-        
-      </Router>
+    </Router>
   );
 }
 

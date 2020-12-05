@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 function Cart () {
 
-    const [books, setBooks] = useStore("books", [])
-    const [cart, setCart] = useStore("cart", [])
+    const [books] = useStore("books", [])
+    const [cart] = useStore("cart", [])
     const booksInCart = books.map(book => {
         const qty = cart.filter(cartItem => cartItem === book.isbn).length //Get quantity of each book in the cart
         return {bookData: book, quantity: qty}
@@ -22,17 +22,20 @@ function Cart () {
 
     useEffect(() => {
         //Get commercial offers
-        fetch("http://henri-potier.xebia.fr/books/"+cart.join()+"/commercialOffers")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                console.log(result);
-                calculateOffer(result);
-            },
-            (error) => {
-                console.log(error)
-            }
-        )
+        if(cart.length > 0){
+            fetch("http://henri-potier.xebia.fr/books/"+cart.join()+"/commercialOffers")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    calculateOffer(result);
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+        }
+        
 
 
     }, [])
@@ -40,10 +43,11 @@ function Cart () {
     function calculateOffer(offer) {
 
         let total = firstTotalPrice
-        let total1 = 1000 //dummy values
+        let total1 = 1000 //temporary values
         let total2 = 1000
         let total3 = 1000
-        offer['offers'].map(off => {
+
+        offer['offers'].forEach(off => {
             if(off.type === 'percentage') {
                 total1 = total - (total/100)*off.value
             }else if(off.type === 'minus'){
@@ -52,8 +56,8 @@ function Cart () {
                 total3 = total - Math.trunc(total/off.sliceValue)*off.value
             }
         })
-        total = Math.min(total1, total2, total3).toFixed(2)
-        let newReduction = (firstTotalPrice - total).toFixed(2)
+        total = Math.min(total1, total2, total3).toFixed(2) //Select the best offer
+        let newReduction = (firstTotalPrice - total).toFixed(2) // Calculate reduction
     
         setFinalTotal(total)
         setReduction(newReduction)
@@ -65,6 +69,7 @@ function Cart () {
 	return (
         <React.Fragment>
             <Link to="/" className="back">⬅</Link>
+            <h1 className="title">PANIER</h1>
             {cart.length === 0 ?
                 <div className="Cart"><div className="cart-item">Votre panier est vide 🤔</div></div>
                 :
@@ -80,7 +85,7 @@ function Cart () {
                 <div className="price-ctn">
                     Prix avant réduction: {firstTotalPrice} €<br />
                     Réduction obtenue: -{reduction} €<br />
-                    Prix après réduction: {finalTotal}€
+                    <strong>Prix Final: {finalTotal} €</strong> 
                 </div> 
             </div>
             }

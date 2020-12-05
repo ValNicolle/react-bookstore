@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useStore } from "react-context-hook"
+import PropTypes from 'prop-types'
 
 function BookItem (props) {
 
@@ -53,6 +54,16 @@ function BookItem (props) {
 	
 	
 	
+}
+
+BookItem.propTypes = {
+    book: PropTypes.exact({
+        cover: PropTypes.string.isRequired,
+        isbn: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        synopsis: PropTypes.array.isRequired,
+        title: PropTypes.string.isRequired,
+    })
 }
 
 export default BookItem;
