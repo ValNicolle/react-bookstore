@@ -27,7 +27,6 @@ function Cart () {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     calculateOffer(result);
                 },
                 (error) => {

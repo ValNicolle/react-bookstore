@@ -3,7 +3,7 @@ import { useStore } from "react-context-hook"
 import loader from './loader.webp'
 import BookItem from './BookItem'
 
-function Home () {
+function BooksList () {
 
   const [books, setBooks] = useStore("books", []);
   const [displayedBooks, setDisplayedBooks] = useState([])
@@ -62,4 +62,4 @@ function Home () {
 }
 
 
-export default Home;
+export default BooksList;

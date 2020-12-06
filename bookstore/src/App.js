@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Home from './Home';
+import BooksList from './BooksList';
 import Cart from './Cart';
 import { withStore} from 'react-context-hook'
 import './App.scss';
@@ -11,7 +11,7 @@ function App() {
         <div className="App">
           <Link to='/cart'><MiniCart /></Link>
           <div className="content">
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={BooksList}/>
             <Route exact path="/cart" component={Cart}/>
           </div>
         </div>
