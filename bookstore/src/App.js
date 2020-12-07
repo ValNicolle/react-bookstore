@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import BooksList from './BooksList';
 import Cart from './Cart';
-import { withStore} from 'react-context-hook'
+import { withStore } from 'react-context-hook'
 import './App.scss';
 import MiniCart from "./MiniCart";
 

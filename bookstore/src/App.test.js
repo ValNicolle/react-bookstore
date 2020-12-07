@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import ReactDOM from 'react-dom'
 
@@ -13,3 +13,12 @@ it("renders without crashing", () => {
   ReactDOM.render(<App/>, div)
 })
 
+test('renders BookItem correctly', async() => {
+  render(<App />) 
+
+  await waitFor(() =>
+      screen.findByRole('heading', { name: /Henri Potier à l'école des sorciers/i }),
+  )
+  screen.getAllByText(/35 €/i)
+
+})
