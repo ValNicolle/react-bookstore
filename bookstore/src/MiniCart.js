@@ -10,7 +10,7 @@ function MiniCart () {
 
 	return (
 
-       <div className="MiniCart">🛒<div className="qty">{quantityInCart}</div></div>
+       <div data-testid="MiniCart" className="MiniCart">🛒<div className="qty">{quantityInCart}</div></div>
 
 		);
 	
